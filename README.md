@@ -1,5 +1,11 @@
 # Impressia
 
+> **Fork notice.** This repository is a personal fork of [Impressia](https://github.com/Impressia/Impressia)
+> (Apache License 2.0, Copyright © Marcin Czachurski and the repository contributors).
+> Modifications Copyright © 2026 Piotr Großmann, also released under the Apache License 2.0.
+> The "Impressia" name, icon, and original bundle identifiers belong to the upstream project —
+> Apache 2.0 §6 does not grant trademark rights.
+
 <img src="Resources/01.png" width="200" > <img src="Resources/04.png" width="200" > <img src="Resources/05.png" width="200" > <img src="Resources/06.png" width="200" >
 
 Impressia (so far known as Vernissage) is a simple and intuitive Pixelfed client that is focused on showcasing and sharing photos.

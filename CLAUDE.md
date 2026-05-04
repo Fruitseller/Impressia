@@ -92,4 +92,46 @@ Add a new string in the catalog of the module that *uses* it, not the app catalo
 
 - Singletons (`Client.shared`, `ApplicationState.shared`, `SwiftDataHandler.shared`, the various `*Handler.shared`) are the established pattern — don't "modernize" them away without a plan; `ApplicationState` is wired into the SwiftUI environment, not injected via DI.
 - The README's "Technical debt" list (no ViewModels, no auto-generated resources, no SwiftLint integration) is intentional for v1; treat changes in those areas as larger refactors that need discussion.
-- Source files carry a standard Apache-2.0 copyright header (`Copyright © 2023 Marcin Czachurski and the repository contributors.`); keep it on new files.
+
+## License & attribution (Apache 2.0)
+
+This repo is a fork of [Impressia](https://github.com/Impressia/Impressia) (Apache License 2.0, © Marcin Czachurski et al.). Apache 2.0 §4 has hard rules — follow them.
+
+### Never touch
+- `LICENSE` — keep the original, unchanged.
+- Existing copyright/license headers in existing files — even on heavy rewrites, **do not remove**. Apache 2.0 §4(c) requires they be retained.
+- The original `NOTICE` file (if present) — only append, never replace.
+- The fork-attribution block at the top of `README.md` — even if the README is otherwise rewritten, this block stays.
+
+### New files (written from scratch, not derived from upstream)
+Add this header at the top:
+```swift
+// Copyright <YEAR> Piotr Großmann
+// Licensed under the Apache License, Version 2.0
+```
+
+### Substantial changes to existing upstream files
+**Keep** the original header and add a `Modifications` line below it:
+```swift
+// Modifications Copyright <YEAR> Piotr Großmann
+```
+(Apache 2.0 §4(b) requires "prominent notices" on modified files. Git history is the real record; the header is belt-and-suspenders.)
+
+### NOTICE file
+Not present yet. On larger restructures, create `NOTICE` with:
+```
+Impressia
+Copyright <YEAR> Marcin Czachurski and contributors
+
+This product includes software developed by the Impressia project.
+
+Modifications Copyright <YEAR> Piotr Großmann
+```
+
+### Trademark / branding (not licensing, but related)
+- App name "Impressia", icon, and the `dev.mczachurski.vernissage` bundle id belong to upstream.
+- Fine for a private GitHub fork.
+- **Before any App Store submission:** rename the app, swap the icon, change the bundle id. Apache 2.0 §6 does not grant trademark rights.
+
+### Source headers in this repo
+Existing files carry `Copyright © 2023 Marcin Czachurski and the repository contributors. Licensed under the Apache License 2.0.` — preserve it on edits per the rules above.
