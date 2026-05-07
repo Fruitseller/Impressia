@@ -8,7 +8,7 @@ import OSLog
 
 public extension Logger {
     /// Using your bundle identifier is a great way to ensure a unique identifier.
-    private static var subsystem = Bundle.main.bundleIdentifier ?? "dev.mczachurski.vernissage"
+    private static var subsystem = Bundle.main.bundleIdentifier ?? "io.github.fruitseller.impressia"
 
     /// Logs the main informations.
     static let main = Logger(subsystem: subsystem, category: "main")

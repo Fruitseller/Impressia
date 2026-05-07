@@ -4,7 +4,7 @@ This file provides guidance to AI coding agents when working with code in this r
 
 ## Project Overview
 
-Impressia (formerly Vernissage) is a SwiftUI iOS/iPadOS Pixelfed client focused on photo timelines. The product bundle id is still `dev.mczachurski.vernissage` (with `.share` and `.widget` siblings) — do not "fix" these to match the new name; they tie to existing App Store / shared-container identity.
+Impressia (formerly Vernissage) is a SwiftUI iOS/iPadOS Pixelfed client focused on photo timelines. This fork uses bundle id `io.github.fruitseller.impressia` (with `.share` and `.widget` siblings) and app group `group.io.github.fruitseller.impressia`.
 
 - Min deployment: iOS 17 (uses `@Observable`, SwiftData, TipKit, BackgroundTasks)
 - Swift tools: 5.9, Swift language version 5.0

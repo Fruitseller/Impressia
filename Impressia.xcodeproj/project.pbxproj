@@ -1200,7 +1200,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 306;
-				DEVELOPMENT_TEAM = B2U9FEKYP8;
+				DEVELOPMENT_TEAM = 2DPUG448BC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ImpressiaWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ImpressiaWidget;
@@ -1212,7 +1212,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 3.4.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.fruitseller.impressia.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1235,7 +1235,7 @@
 				CODE_SIGN_ENTITLEMENTS = ImpressiaWidget/ImpressiaWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 306;
-				DEVELOPMENT_TEAM = B2U9FEKYP8;
+				DEVELOPMENT_TEAM = 2DPUG448BC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ImpressiaWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ImpressiaWidget;
@@ -1247,7 +1247,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 3.4.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.fruitseller.impressia.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1269,7 +1269,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 306;
-				DEVELOPMENT_TEAM = B2U9FEKYP8;
+				DEVELOPMENT_TEAM = 2DPUG448BC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ImpressiaShare/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ImpressiaShareExtension;
@@ -1281,7 +1281,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 3.4.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage.share;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.fruitseller.impressia.share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1302,7 +1302,7 @@
 				CODE_SIGN_ENTITLEMENTS = ImpressiaShare/ImpressiaShareExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 306;
-				DEVELOPMENT_TEAM = B2U9FEKYP8;
+				DEVELOPMENT_TEAM = 2DPUG448BC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ImpressiaShare/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ImpressiaShareExtension;
@@ -1314,7 +1314,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 3.4.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage.share;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.fruitseller.impressia.share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1463,7 +1463,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 306;
 				DEVELOPMENT_ASSET_PATHS = "\"Impressia/Preview Content\"";
-				DEVELOPMENT_TEAM = B2U9FEKYP8;
+				DEVELOPMENT_TEAM = 2DPUG448BC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Impressia/Info.plist;
@@ -1481,7 +1481,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 3.4.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.fruitseller.impressia;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1507,7 +1507,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 306;
 				DEVELOPMENT_ASSET_PATHS = "\"Impressia/Preview Content\"";
-				DEVELOPMENT_TEAM = B2U9FEKYP8;
+				DEVELOPMENT_TEAM = 2DPUG448BC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Impressia/Info.plist;
@@ -1525,7 +1525,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 3.4.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.fruitseller.impressia;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
