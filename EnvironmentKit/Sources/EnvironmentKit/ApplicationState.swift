@@ -1,6 +1,7 @@
 //
 //  https://mczachurski.dev
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
+//  Modifications Copyright 2026 Piotr Großmann
 //  Licensed under the Apache License 2.0.
 //
 
@@ -94,9 +95,6 @@ import ClientKit
 
     /// Updated user profile.
     public var updatedProfile: Account?
-
-    /// Information which menu should be shown (top or bottom).
-    public var menuPosition = MenuPosition.top
 
     /// Should avatars be visible on timelines.
     public var showAvatarsOnTimeline = false

@@ -21,7 +21,7 @@ public struct PhotoEditorView: View {
     }
 
     public var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(alignment: .leading) {
                 List {
                     Section(header: Text("photoEdit.title.photo", bundle: Bundle.module, comment: "Photo")) {

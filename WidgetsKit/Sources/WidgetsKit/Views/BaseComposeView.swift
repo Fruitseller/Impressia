@@ -1,6 +1,7 @@
 //
 //  https://mczachurski.dev
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
+//  Modifications Copyright 2026 Piotr Großmann
 //  Licensed under the Apache License 2.0.
 //
 
@@ -519,11 +520,14 @@ public struct BaseComposeView: View {
     private func contentWarningView() -> some View {
         if self.isSensitive {
             TextField(NSLocalizedString("compose.title.writeContentWarning", bundle: Bundle.module, comment: "Content warning"), text: $spoilerText, axis: .vertical)
-                .padding(8)
+                .padding(.vertical, 10)
+                .padding(.horizontal, 12)
                 .lineLimit(1...2)
                 .focused($focusedField, equals: .spoilerText)
                 .keyboardType(.default)
-                .background(Color.dangerColor.opacity(0.4))
+                .background(Color.dangerColor.opacity(0.18), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .padding(.horizontal, 8)
+                .padding(.top, 6)
         }
     }
 
@@ -535,9 +539,13 @@ public struct BaseComposeView: View {
                 Text("compose.title.commentsWillBeDisabled", bundle: Bundle.module, comment: "Comments disabled")
                     .textCase(.uppercase)
                     .font(.caption2)
-                    .foregroundColor(.dangerColor)
+                    .foregroundStyle(Color.dangerColor)
+                    .padding(.vertical, 6)
+                    .padding(.horizontal, 10)
+                    .background(Color.dangerColor.opacity(0.08), in: Capsule())
             }
             .padding(.horizontal, 8)
+            .padding(.top, 6)
         }
     }
 
@@ -628,9 +636,9 @@ public struct BaseComposeView: View {
 
                                     VStack(alignment: .leading) {
                                         Text(account.displayNameWithoutEmojis)
-                                            .foregroundColor(.mainTextColor)
+                                            .foregroundStyle(Color.mainTextColor)
                                         Text("@\(account.acct)")
-                                            .foregroundColor(.customGrayColor)
+                                            .foregroundStyle(Color.customGrayColor)
                                     }
                                     .padding(.leading, 8)
                                 }
@@ -646,7 +654,7 @@ public struct BaseComposeView: View {
                             } label: {
                                 Text("#\(tag.name)")
                                     .font(.system(size: self.autocompleteFontTextSize))
-                                    .foregroundColor(self.applicationState.tintColor.color())
+                                    .foregroundStyle(self.applicationState.tintColor.color())
                             }
                             Divider()
                         }
@@ -655,14 +663,13 @@ public struct BaseComposeView: View {
                 .padding(.horizontal, 8)
             }
             .frame(height: 40)
-            .background(.ultraThinMaterial)
+            .background(Color.keyboardToolbarColor)
         }
     }
 
     @ViewBuilder
     private func keyboardToolbar() -> some View {
-        VStack(spacing: 0) {
-            Divider()
+        GlassEffectContainer(spacing: 8) {
             HStack {
                 ScrollView(.horizontal) {
                     HStack(alignment: .center, spacing: 20) {
@@ -781,14 +788,17 @@ public struct BaseComposeView: View {
                 Spacer()
 
                 Text("\(self.applicationState.statusMaxCharacters - textModel.text.string.utf16.count)")
-                    .foregroundColor(.customGrayColor)
+                    .foregroundStyle(Color.customGrayColor)
                     .font(.system(size: self.keyboardFontTextSize))
                     .accessibilityLabel("") // TODO: Add a11y label
             }
-            .padding(8)
+            .padding(.vertical, 10)
+            .padding(.horizontal, 14)
             .font(.system(size: self.keyboardFontImageSize))
+            .glassEffect(.regular.interactive(), in: Capsule())
         }
-        .background(Color.keyboardToolbarColor)
+        .padding(.horizontal, 10)
+        .padding(.bottom, 6)
     }
 
     private func placeholder() -> String {

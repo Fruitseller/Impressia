@@ -1,10 +1,12 @@
 //
 //  https://mczachurski.dev
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
+//  Modifications Copyright 2026 Piotr Großmann
 //  Licensed under the Apache License 2.0.
 //
 
 import SwiftUI
+#if ENABLE_IAP
 import StoreKit
 import ServicesKit
 
@@ -50,3 +52,4 @@ struct SupportView: View {
         }
     }
 }
+#endif

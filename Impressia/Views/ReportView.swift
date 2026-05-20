@@ -39,7 +39,7 @@ struct ReportView: View {
     }
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section("report.title.reportType") {
 

@@ -25,60 +25,55 @@ struct SettingsView: View {
         @Bindable var tipsStore = tipsStore
 
         NavigationStack {
-            NavigationView {
-                List {
-                    // Accounts.
-                    AccountsSectionView()
+            List {
+                // Accounts.
+                AccountsSectionView()
 
-                    // General.
-                    GeneralSectionView()
+                // General.
+                GeneralSectionView()
 
-                    // Accents.
-                    AccentsSectionView()
+                // Accents.
+                AccentsSectionView()
 
-                    // Avatar shapes.
-                    AvatarShapesSectionView()
+                // Avatar shapes.
+                AvatarShapesSectionView()
 
-                    // Notifications.
-                    NotificationView()
-                    
-                    // Media settings view.
-                    MediaSettingsView()
+                // Notifications.
+                NotificationView()
+                
+                // Media settings view.
+                MediaSettingsView()
 
-                    // Haptics.
-                    HapticsSectionView()
+                // Haptics.
+                HapticsSectionView()
 
-                    // Support.
-                    SupportView()
+                // Other.
+                OtherSectionView()
 
-                    // Other.
-                    OtherSectionView()
+                // Socials.
+                SocialsSectionView()
 
-                    // Socials.
-                    SocialsSectionView()
-
-                    // Version.
-                    self.version()
-                }
-                .frame(alignment: .topLeading)
-                .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button(NSLocalizedString("settings.title.close", comment: "Close"), role: .cancel) {
-                            self.dismiss()
-                        }
+                // Version.
+                self.version()
+            }
+            .frame(alignment: .topLeading)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(NSLocalizedString("settings.title.close", comment: "Close"), role: .cancel) {
+                        self.dismiss()
                     }
                 }
-                .task {
-                    self.appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-                    self.appBundleVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
-                }
-                .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification), perform: { _ in
-                    self.theme = applicationState.theme.colorScheme() ?? self.getSystemColorScheme()
-                })
-                .navigationTitle("settings.navigationBar.title")
-                .navigationBarTitleDisplayMode(.inline)
-                .preferredColorScheme(self.theme)
             }
+            .task {
+                self.appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+                self.appBundleVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+            }
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification), perform: { _ in
+                self.theme = applicationState.theme.colorScheme() ?? self.getSystemColorScheme()
+            })
+            .navigationTitle("settings.navigationBar.title")
+            .navigationBarTitleDisplayMode(.inline)
+            .preferredColorScheme(self.theme)
             .withAppRouteur()
             .withOverlayDestinations(overlayDestinations: $routerPath.presentedOverlay)
         }

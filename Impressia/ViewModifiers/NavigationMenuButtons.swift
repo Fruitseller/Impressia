@@ -1,6 +1,7 @@
 //
 //  https://mczachurski.dev
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
+//  Modifications Copyright 2026 Piotr Großmann
 //  Licensed under the Apache License 2.0.
 //
 
@@ -13,11 +14,9 @@ import WidgetsKit
 
 @MainActor
 extension View {
-    func navigationMenuButtons(menuPosition: Binding<MenuPosition>,
-                               viewMode: Binding<MainView.ViewMode>,
+    func navigationMenuButtons(viewMode: Binding<MainView.ViewMode>,
                                onViewModeIconTap: @escaping (MainView.ViewMode) -> Void) -> some View {
-        modifier(NavigationMenuButtons(menuPosition: menuPosition,
-                                       viewMode: viewMode,
+        modifier(NavigationMenuButtons(viewMode: viewMode,
                                        onViewModeIconTap: onViewModeIconTap))
     }
 }
@@ -28,7 +27,6 @@ private struct NavigationMenuButtons: ViewModifier {
     @Environment(RouterPath.self) var routerPath
     @Environment(\.modelContext) private var modelContext
 
-    private let menuCustomizableTip = MenuCustomizableTip()
     private let onViewModeIconTap: (MainView.ViewMode) -> Void
     private let imageFontSize = 20.0
 
@@ -40,44 +38,38 @@ private struct NavigationMenuButtons: ViewModifier {
 
     @State private var hiddenMenuItems: [MainView.ViewMode] = []
 
-    @Binding var menuPosition: MenuPosition
     @Binding var viewMode: MainView.ViewMode
 
-    init(menuPosition: Binding<MenuPosition>, viewMode: Binding<MainView.ViewMode>, onViewModeIconTap: @escaping (MainView.ViewMode) -> Void) {
+    init(viewMode: Binding<MainView.ViewMode>, onViewModeIconTap: @escaping (MainView.ViewMode) -> Void) {
         self.onViewModeIconTap = onViewModeIconTap
-        self._menuPosition = menuPosition
         self._viewMode = viewMode
     }
 
     func body(content: Content) -> some View {
-        if self.menuPosition == .top {
+        ZStack {
             content
-        } else {
-            ZStack {
-                content
 
-                VStack(alignment: .trailing) {
+            VStack(alignment: .trailing) {
+                Spacer()
+
+                HStack(alignment: .center) {
                     Spacer()
-
-                    HStack(alignment: .center) {
-                        Spacer()
-                        self.menuContainerView()
-                            .padding(.bottom, 10)
-                        Spacer()
-                    }
+                    self.menuContainerView()
+                        .padding(.bottom, 10)
+                    Spacer()
                 }
-                .onAppear {
-                    self.loadCustomMenuItems()
-                }
+            }
+            .onAppear {
+                self.loadCustomMenuItems()
             }
         }
     }
 
     @ViewBuilder
     private func menuContainerView() -> some View {
-        if self.menuPosition == .bottomRight {
+        GlassEffectContainer(spacing: 12) {
             HStack(alignment: .center) {
-                AccountAvatarMenu(menuPosition: $menuPosition, viewMode: $viewMode)
+                AccountAvatarMenu(viewMode: $viewMode)
 
                 HStack {
                     self.contextMenuView()
@@ -85,36 +77,13 @@ private struct NavigationMenuButtons: ViewModifier {
                 }
                 .frame(height: 50)
                 .padding(.horizontal, 8)
-                .background(.ultraThinMaterial)
-                .clipShape(Capsule())
+                .glassEffect(.regular.interactive(), in: Capsule())
 
                 self.composeImageView()
                     .frame(height: 50)
                     .padding(.horizontal, 8)
-                    .background(.ultraThinMaterial)
-                    .clipShape(Circle())
+                    .glassEffect(.regular.interactive(), in: Circle())
             }
-            .popoverTip(menuCustomizableTip, arrowEdge: .bottom)
-        } else {
-            HStack(alignment: .center) {
-                self.composeImageView()
-                    .frame(height: 50)
-                    .padding(.horizontal, 8)
-                    .background(.ultraThinMaterial)
-                    .clipShape(Circle())
-
-                HStack {
-                    self.customMenuItemsView()
-                    self.contextMenuView()
-                }
-                .frame(height: 50)
-                .padding(.horizontal, 8)
-                .background(.ultraThinMaterial)
-                .clipShape(Capsule())
-
-                AccountAvatarMenu(menuPosition: $menuPosition, viewMode: $viewMode)
-            }
-            .popoverTip(menuCustomizableTip, arrowEdge: .bottom)
         }
     }
 
@@ -127,7 +96,7 @@ private struct NavigationMenuButtons: ViewModifier {
         } label: {
             Image(systemName: "ellipsis")
                 .font(.system(size: self.imageFontSize))
-                .foregroundColor(.mainTextColor.opacity(0.75))
+                .foregroundStyle(Color.mainTextColor.opacity(0.75))
                 .padding(.vertical, 10)
                 .padding(.horizontal, 8)
         }
@@ -149,7 +118,7 @@ private struct NavigationMenuButtons: ViewModifier {
         } label: {
             Image(systemName: "plus")
                 .font(.system(size: self.imageFontSize))
-                .foregroundColor(.mainTextColor.opacity(0.75))
+                .foregroundStyle(Color.mainTextColor.opacity(0.75))
                 .padding(.vertical, 10)
                 .padding(.horizontal, 8)
         }
@@ -162,7 +131,7 @@ private struct NavigationMenuButtons: ViewModifier {
         } label: {
             displayedCustomMenuItem.viewMode.getImage(applicationState: applicationState)
                 .font(.system(size: self.imageFontSize))
-                .foregroundColor(.mainTextColor.opacity(0.75))
+                .foregroundStyle(Color.mainTextColor.opacity(0.75))
                 .padding(.vertical, 10)
                 .padding(.horizontal, 8)
         }.contextMenu {
@@ -184,7 +153,6 @@ private struct NavigationMenuButtons: ViewModifier {
                 }
 
                 self.hiddenMenuItems = self.displayedCustomMenuItems.map({ $0.viewMode })
-                MenuCustomizableTip().invalidate(reason: .actionPerformed)
             }
         }
     }

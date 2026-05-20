@@ -1,6 +1,7 @@
 //
 //  https://mczachurski.dev
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
+//  Modifications Copyright 2026 Piotr Großmann
 //  Licensed under the Apache License 2.0.
 //
 
@@ -186,9 +187,9 @@ struct HomeTimelineView: View {
                 .padding(.vertical, 12)
                 .padding(.horizontal, 18)
                 .font(.callout)
-                .foregroundColor(Color.mainTextColor)
-                .background(.ultraThinMaterial)
-                .clipShape(Capsule())
+                .foregroundStyle(Color.mainTextColor)
+                .background(Color.black.opacity(0.18), in: Capsule())
+                .glassEffect(.clear.interactive(), in: Capsule())
             }
 
             Spacer()

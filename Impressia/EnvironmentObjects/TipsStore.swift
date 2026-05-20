@@ -1,19 +1,24 @@
 //
 //  https://mczachurski.dev
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
+//  Modifications Copyright 2026 Piotr Großmann
 //  Licensed under the Apache License 2.0.
 //
 
 import Foundation
+#if ENABLE_IAP
 import StoreKit
+#endif
 import ServicesKit
 import OSLog
 import EnvironmentKit
 
 @Observable final class TipsStore {
 
+#if ENABLE_IAP
     /// Products are registered in AppStore connect (and for development in InAppPurchaseStoreKitConfiguration.storekit file).
     private(set) var items = [Product]()
+#endif
 
     /// Status of the purchase.
     private(set) var status: ActionStatus? {
@@ -44,10 +49,12 @@ import EnvironmentKit
     private var transactionListener: Task<Void, Error>?
 
     init() {
+#if ENABLE_IAP
         transactionListener = configureTransactionListener()
         Task { [weak self] in
             await self?.retrieve()
         }
+#endif
     }
 
     deinit {
@@ -55,6 +62,7 @@ import EnvironmentKit
     }
 
     /// Purchase new product.
+#if ENABLE_IAP
     public func purchase(_ product: Product) async {
         do {
             let result = try await product.purchase()
@@ -64,12 +72,14 @@ import EnvironmentKit
             ErrorService.shared.handle(error, message: "global.error.purchaseFailed", showToastr: false)
         }
     }
+#endif
 
     /// Reset status of the purchase/action.
     public func reset() {
         self.status = nil
     }
 
+#if ENABLE_IAP
     /// Handle purchase result.
     private func handlePurchase(from result: Product.PurchaseResult) async throws {
         switch result {
@@ -125,6 +135,7 @@ import EnvironmentKit
             ErrorService.shared.handle(error, message: "global.error.cannotDownloadInAppProducts", showToastr: false)
         }
     }
+#endif
 }
 
 extension TipsStore {

@@ -23,7 +23,7 @@ struct ComposeView: View {
     }
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             BaseComposeView(attachments: self.attachments) {
                 NotificationCenter.default.post(name: NotificationsName.shareSheetClose, object: nil)
             } onUpload: { photoAttachment in

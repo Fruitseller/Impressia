@@ -33,7 +33,7 @@ public struct PlaceSelectorView: View {
     }
 
     public var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(alignment: .leading) {
                 List {
                     Section {

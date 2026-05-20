@@ -1,6 +1,7 @@
 //
 //  https://mczachurski.dev
 //  Copyright © 2025 Marcin Czachurski and the repository contributors.
+//  Modifications Copyright 2026 Piotr Großmann
 //  Licensed under the Apache License 2.0.
 //
 
@@ -20,7 +21,6 @@ struct AccountAvatarMenu: View {
 
     @Query(sort: \AccountData.acct, order: .forward) var dbAccounts: [AccountData]
 
-    @Binding var menuPosition: MenuPosition
     @Binding var viewMode: MainView.ViewMode
 
     var body: some View {
@@ -52,16 +52,10 @@ struct AccountAvatarMenu: View {
 
     @ViewBuilder
     private func avatarButton() -> some View {
-        if menuPosition == .top {
-            self.getAvatarImage(avatarUrl: self.applicationState.account?.avatar,
-                                avatarData: self.applicationState.account?.avatarData)
-        } else {
-            self.getAvatarImage(avatarUrl: self.applicationState.account?.avatar,
-                                avatarData: self.applicationState.account?.avatarData)
-                .padding(9) // (menu height - avatar size) / 2
-                .background(.ultraThinMaterial)
-                .clipShape(.circle)
-        }
+        self.getAvatarImage(avatarUrl: self.applicationState.account?.avatar,
+                            avatarData: self.applicationState.account?.avatarData)
+            .padding(9) // (menu height - avatar size) / 2
+            .glassEffect(.regular.interactive(), in: Circle())
     }
 
     @ViewBuilder

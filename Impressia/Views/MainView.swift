@@ -1,6 +1,7 @@
 //
 //  https://mczachurski.dev
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
+//  Modifications Copyright 2026 Piotr Großmann
 //  Licensed under the Apache License 2.0.
 //
 
@@ -24,8 +25,6 @@ struct MainView: View {
             self.navBarTitle = viewMode.title
         }
     }
-
-    private let mainNavigationTip = MainNavigationTip()
 
     public enum ViewMode: Int, Identifiable {
         case home = 1
@@ -89,16 +88,12 @@ struct MainView: View {
             case .profile:
                 Image(systemName: "person.crop.circle")
             case .notifications:
-                if applicationState.menuPosition == .top {
-                    applicationState.amountOfNewNotifications > 0 ? Image(systemName: "bell.badge") : Image(systemName: "bell")
-                } else {
-                    applicationState.amountOfNewNotifications > 0
-                    ? AnyView(
-                        Image(systemName: "bell.badge")
-                            .symbolRenderingMode(.palette)
-                            .foregroundStyle(applicationState.tintColor.color().opacity(0.75), Color.mainTextColor.opacity(0.75)))
-                    : AnyView(Image(systemName: "bell"))
-                }
+                applicationState.amountOfNewNotifications > 0
+                ? AnyView(
+                    Image(systemName: "bell.badge")
+                        .symbolRenderingMode(.palette)
+                        .foregroundStyle(applicationState.tintColor.color().opacity(0.75), Color.mainTextColor.opacity(0.75)))
+                : AnyView(Image(systemName: "bell"))
             case .search:
                 Image(systemName: "magnifyingglass")
             case .bookmarks:
@@ -110,28 +105,17 @@ struct MainView: View {
     }
 
     var body: some View {
-        @Bindable var applicationState = applicationState
         @Bindable var routerPath = routerPath
 
         NavigationStack(path: $routerPath.path) {
             self.getMainView()
-                .navigationMenuButtons(menuPosition: $applicationState.menuPosition, viewMode: $viewMode) { viewMode in
+                .navigationMenuButtons(viewMode: $viewMode) { viewMode in
                     self.switchView(to: viewMode)
                 }
                 .navigationTitle(navBarTitle)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
-                    self.getLeadingToolbar()
-                    
-                    if self.applicationState.menuPosition == .top {
-                        self.getPrincipalToolbar()
-                    }
-                    
                     self.getTrailingGridToggleToolbarItem()
-                    
-                    if self.applicationState.menuPosition == .top {
-                        self.getTrailingAddImageToolbarItem()
-                    }
                 }
                 .onChange(of: tipsStore.status) { oldStatus, newStatus in
                     if newStatus == .successful {
@@ -195,39 +179,6 @@ struct MainView: View {
     }
 
     @ToolbarContentBuilder
-    private func getPrincipalToolbar() -> some ToolbarContent {
-        ToolbarItem(placement: .principal) {
-            Menu {
-                MainNavigationOptions(hiddenMenuItems: Binding.constant([])) { viewMode in
-                    self.switchView(to: viewMode)
-                }
-            } label: {
-                HStack {
-                    Text(navBarTitle, comment: "Navbar title")
-                        .font(.headline)
-                    Image(systemName: "chevron.down")
-                        .fontWeight(.semibold)
-                        .font(.subheadline)
-                }
-                .frame(width: 150)
-                .foregroundColor(.mainTextColor)
-                .popoverTip(self.mainNavigationTip)
-            }
-        }
-    }
-
-    @ToolbarContentBuilder
-    private func getLeadingToolbar() -> some ToolbarContent {
-        if applicationState.menuPosition == .top {
-            @Bindable var applicationState = applicationState
-
-            ToolbarItem(placement: .navigationBarLeading) {
-                AccountAvatarMenu(menuPosition: $applicationState.menuPosition, viewMode: $viewMode)
-            }
-        }
-    }
-    
-    @ToolbarContentBuilder
     private func getTrailingGridToggleToolbarItem() -> some ToolbarContent {
         if self.isGridToggleVisible {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -250,22 +201,6 @@ struct MainView: View {
         }
     }
 
-    @ToolbarContentBuilder
-    private func getTrailingAddImageToolbarItem() -> some ToolbarContent {
-        if viewMode == .local || viewMode == .home || viewMode == .federated || viewMode == .trendingPhotos || viewMode == .search {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    HapticService.shared.fireHaptic(of: .buttonPress)
-                    self.routerPath.presentedSheet = .newStatusEditor
-                } label: {
-                    Image(systemName: "plus")
-                        .foregroundColor(Color.mainTextColor)
-                        .fontWeight(.semibold)
-                }
-            }
-        }
-    }
-
     private var isGridToggleVisible: Bool {
         switch viewMode {
         case .home:
@@ -276,6 +211,7 @@ struct MainView: View {
             return false
         }
     }
+
 
     private func switchView(to newViewMode: ViewMode) {
         HapticService.shared.fireHaptic(of: .tabSelection)

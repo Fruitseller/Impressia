@@ -1,6 +1,7 @@
 //
 //  https://mczachurski.dev
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
+//  Modifications Copyright 2026 Piotr Großmann
 //  Licensed under the Apache License 2.0.
 //
 
@@ -35,12 +36,6 @@ struct GeneralSectionView: View {
         (Theme.system, "settings.title.system"),
         (Theme.light, "settings.title.light"),
         (Theme.dark, "settings.title.dark")
-    ]
-
-    private let menuPositions: [(menuPosition: MenuPosition, name: LocalizedStringKey)] = [
-        (MenuPosition.top, "settings.title.topMenu"),
-        (MenuPosition.bottomRight, "settings.title.bottomRightMenu"),
-        (MenuPosition.bottomLeft, "settings.title.bottomLeftMenu")
     ]
 
     var body: some View {
@@ -79,19 +74,6 @@ struct GeneralSectionView: View {
                 ApplicationSettingsHandler.shared.set(theme: newTheme, modelContext: modelContext)
             }
 
-            // Menu position.
-            Picker(selection: $applicationState.menuPosition) {
-                ForEach(self.menuPositions, id: \.menuPosition) { item in
-                    Text(item.name, comment: "Menu positions")
-                        .tag(item.menuPosition)
-                }
-            } label: {
-                Text("settings.title.menuPosition", comment: "Menu position")
-            }
-            .onChange(of: self.applicationState.menuPosition) { oldMenuPosition, newMenuPosition in
-                MainNavigationTip().invalidate(reason: .actionPerformed)
-                ApplicationSettingsHandler.shared.set(menuPosition: newMenuPosition, modelContext: modelContext)
-            }
         }
     }
 }

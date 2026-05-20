@@ -36,7 +36,7 @@ struct ComposeView: View {
     var body: some View {
         @Bindable var routerPath = routerPath
 
-        NavigationView {
+        NavigationStack {
             if let statusToEdit {
                 BaseComposeView(statusToEdit: statusToEdit) {
                     dismiss()

@@ -1,6 +1,7 @@
 //
 //  https://mczachurski.dev
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
+//  Modifications Copyright 2026 Piotr Großmann
 //  Licensed under the Apache License 2.0.
 //
 
@@ -25,7 +26,6 @@ import EnvironmentKit
     public var showSensitive: Bool = false
     public var showApplicationBadge: Bool = false
     public var showPhotoDescription: Bool = false
-    public var menuPosition: Int32 = Int32(MenuPosition.top.rawValue)
     public var showAvatarsOnTimeline: Bool = false
     public var showFavouritesOnTimeline: Bool = false
     public var showAltIconOnTimeline: Bool = false
@@ -54,7 +54,6 @@ import EnvironmentKit
         showSensitive: Bool = false,
         showApplicationBadge: Bool = false,
         showPhotoDescription: Bool = false,
-        menuPosition: Int32 = Int32(MenuPosition.top.rawValue),
         showAvatarsOnTimeline: Bool = false,
         showFavouritesOnTimeline: Bool = false,
         showAltIconOnTimeline: Bool = false,
@@ -81,7 +80,6 @@ import EnvironmentKit
         self.showSensitive = showSensitive
         self.showApplicationBadge = showApplicationBadge
         self.showPhotoDescription = showPhotoDescription
-        self.menuPosition = menuPosition
         self.showAvatarsOnTimeline = showAvatarsOnTimeline
         self.showFavouritesOnTimeline = showFavouritesOnTimeline
         self.showAltIconOnTimeline = showAltIconOnTimeline

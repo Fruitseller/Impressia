@@ -1,6 +1,7 @@
 //
 //  https://mczachurski.dev
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
+//  Modifications Copyright 2026 Piotr Großmann
 //  Licensed under the Apache License 2.0.
 //
 
@@ -69,10 +70,6 @@ class ApplicationSettingsHandler {
         applicationState.showReboostedStatuses = defaultSettings.showReboostedStatuses
         applicationState.hideStatusesWithoutAlt = defaultSettings.hideStatusesWithoutAlt
         applicationState.showApplicationBadge = defaultSettings.showApplicationBadge
-
-        if let menuPosition = MenuPosition(rawValue: Int(defaultSettings.menuPosition)) {
-            applicationState.menuPosition = menuPosition
-        }
 
         applicationState.hapticTabSelectionEnabled = defaultSettings.hapticTabSelectionEnabled
         applicationState.hapticRefreshEnabled = defaultSettings.hapticRefreshEnabled
@@ -156,12 +153,6 @@ class ApplicationSettingsHandler {
     func set(activeIcon: String, modelContext: ModelContext) {
         let defaultSettings = self.get(modelContext: modelContext)
         defaultSettings.activeIcon = activeIcon
-        try? modelContext.save()
-    }
-
-    func set(menuPosition: MenuPosition, modelContext: ModelContext) {
-        let defaultSettings = self.get(modelContext: modelContext)
-        defaultSettings.menuPosition = Int32(menuPosition.rawValue)
         try? modelContext.save()
     }
 
